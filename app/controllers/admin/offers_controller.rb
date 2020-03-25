@@ -47,6 +47,22 @@ class Admin::OffersController < ApplicationController
     end
   end
 
+  def disable
+    if @offer.update(status: :disabled)
+      format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully disabled.' }
+    else
+      format.html { redirect_to [:admin, @offer], notice: 'There was an error.' }
+    end
+  end
+
+  def enable
+    if @offer.update(status: :enabled)
+      format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully enabled.' }
+    else
+      format.html { redirect_to [:admin, @offer], notice: 'There was an error.' }
+    end
+  end
+
   private
 
   def set_offer
