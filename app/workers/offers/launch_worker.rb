@@ -5,6 +5,7 @@ class Offers::LaunchWorker
     offer = Offer.find(offer_id)
 
     return unless offer.launch_jid == self.jid
+
     offer.update(status: :enabled)
   end
 end
