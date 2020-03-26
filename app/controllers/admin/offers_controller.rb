@@ -22,6 +22,8 @@ class Admin::OffersController < ApplicationController
 
     respond_to do |format|
       if @offer.save
+        launch_jid = ::Offers::LaunchWorker.perform_at(@offer.starts_at, @offer.id)
+        @offer.update(launch_jid: launch_jid)
         format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully created.' }
       else
         format.html { render :new }
@@ -31,7 +33,12 @@ class Admin::OffersController < ApplicationController
 
   def update
     respond_to do |format|
+      old_starts_at = @offer.starts_at
       if @offer.update(offer_params)
+        if @offer.starts_at != old_starts_at
+          launch_jid = ::Offers::LaunchWorker.perform_at(@offer.starts_at, @offer.id)
+          @offer.update(launch_jid: launch_jid)
+        end
         format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully updated.' }
       else
         format.html { render :edit }
