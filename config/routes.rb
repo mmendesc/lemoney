@@ -10,4 +10,8 @@ Rails.application.routes.draw do
 
     root to: 'offers#index'
   end
+
+  resources :offers
+
+  root to: 'offers#index'
 end

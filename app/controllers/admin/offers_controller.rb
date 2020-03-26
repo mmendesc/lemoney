@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::OffersController < ApplicationController
+class Admin::OffersController < Admin::ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
 
   def index

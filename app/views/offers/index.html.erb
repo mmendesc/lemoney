@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Offers</h1>
+
+<div class="offers">
+  <% @offers.each do |offer| %>
+    <div class="offer">
+      <h3><%= offer.advertiser_name%></h3>
+      <p><%= offer.description %></p>
+      <%= link_to 'Ver oferta', offer.url %>
+    </div>
+  <% end %>
+</div>
