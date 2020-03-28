@@ -15,13 +15,13 @@ class Offers::LaunchService < ApplicationService
   private
 
   def activate_offer
-    offer.update(status: :enable)
+    offer.update(status: :enabled)
   end
 
   def schedule_end_offer
     return if offer.ends_at.nil?
 
-    end_jid = ::Offers::EndWorker.perform_at(@offer.ends_at, @offer.id)
+    end_jid = Offers::EndWorker.perform_at(@offer.ends_at, @offer.id)
     offer.update(end_jid: end_jid)
   end
 end

@@ -5,5 +5,9 @@ FactoryBot.define do
     url { Faker::Internet.url }
     starts_at { Time.now + 2.days }
     ends_at { Time.now + 5.days }
+
+    trait :endless do
+      ends_at { nil }
+    end
   end
 end
