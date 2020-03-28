@@ -4,6 +4,6 @@ class OffersController < ApplicationController
   # before_action :set_offer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @offers = Offer.all
+    @offers = Offer.enabled
   end
 end

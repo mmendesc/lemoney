@@ -9,5 +9,9 @@ FactoryBot.define do
     trait :endless do
       ends_at { nil }
     end
+
+    trait :enabled do
+      status { :enabled }
+    end
   end
 end
