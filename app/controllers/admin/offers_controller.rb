@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 class Admin::OffersController < Admin::ApplicationController
-  before_action :set_offer, only: [:show, :edit, :update, :destroy]
+  before_action :set_offer, except: %w(index create)
 
   def index
     @offers = Offer.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @offer = Offer.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
+    @offer = Offers::CreateService.run(offer_params).result
+
     respond_to do |format|
-      if @offer.save
+      if @offer.persisted?
         format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully created.' }
       else
         format.html { render :new }
@@ -29,12 +29,7 @@ class Admin::OffersController < Admin::ApplicationController
 
   def update
     respond_to do |format|
-      old_starts_at = @offer.starts_at
-      if @offer.update(offer_params)
-        if @offer.starts_at != old_starts_at
-          launch_jid = ::Offers::LaunchWorker.perform_at(@offer.starts_at, @offer.id)
-          @offer.update(launch_jid: launch_jid)
-        end
+      if Offers::UpdateService.run(@offer, offer_params)
         format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully updated.' }
       else
         format.html { render :edit }
@@ -51,18 +46,22 @@ class Admin::OffersController < Admin::ApplicationController
   end
 
   def disable
-    if @offer.update(status: :disabled)
-      format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully disabled.' }
-    else
-      format.html { redirect_to [:admin, @offer], notice: 'There was an error.' }
+    respond_to do |format|
+      if @offer.update(status: :disabled)
+        format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully disabled.' }
+      else
+        format.html { redirect_to [:admin, @offer], notice: 'There was an error.' }
+      end
     end
   end
 
   def enable
-    if @offer.update(status: :enabled)
-      format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully enabled.' }
-    else
-      format.html { redirect_to [:admin, @offer], notice: 'There was an error.' }
+    respond_to do |format|
+      if @offer.update(status: :enabled)
+        format.html { redirect_to [:admin, @offer], notice: 'Offer was successfully enabled.' }
+      else
+        format.html { redirect_to [:admin, @offer], notice: 'There was an error.' }
+      end
     end
   end
 
