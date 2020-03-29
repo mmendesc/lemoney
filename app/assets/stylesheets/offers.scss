@@ -1,0 +1,43 @@
+#title {
+  padding-left: 24px;
+}
+
+.offers {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+
+  .offer {
+    width: 100%;
+    margin-bottom: 24px;
+
+    &:hover {
+      background-color: #EEE;
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .offers {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .offer {
+      margin-right: 24px;
+      flex-grow: 1;
+      padding: 0 32px;
+      min-width: 256px;
+      width: unset;
+    }
+  }
+}

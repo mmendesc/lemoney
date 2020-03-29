@@ -1,13 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Offers</h1>
+<h1 id="title">Offers</h1>
 
 <div class="offers">
   <% @offers.each do |offer| %>
-    <div class="offer">
-      <h3><%= offer.advertiser_name%></h3>
-      <p><%= offer.description %></p>
-      <%= link_to 'Ver oferta', offer.url %>
+    <div class="card offer">
+      <div class="card-body">
+        <h5 class="card-title"><%= offer.advertiser_name%></h5>
+        <p class="card-text"><%= offer.description %></p>
+        <%= link_to 'See offer', offer.url, target: '_blank', class: 'btn btn-primary' %>
+      </div>
+    </div>
+    <div class="card offer">
+      <div class="card-body">
+        <h5 class="card-title"><%= offer.advertiser_name%></h5>
+        <p class="card-text"><%= offer.description %></p>
+        <%= link_to 'See offer', offer.url, target: '_blank', class: 'btn btn-primary' %>
+      </div>
     </div>
   <% end %>
 </div>
