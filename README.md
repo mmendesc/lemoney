@@ -1,24 +1,10 @@
-# README
+**Documentação**
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Url Usuários: https://lemoney.herokuapp.com/
+Url admin: https://lemoney.herokuapp.com/admin
 
-Things you may want to cover:
+Ao criar uma oferta e selecionar o dia de inicio, um worker será agendado para a data escolhida, assim ela será ativada automaticamente.
 
-* Ruby version
+Caso a data de inicio selecionada, já tenha passado, a oferta será ativada imediatamente.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Para rodar localmente, é necessario ter o redis-server rodando e o sidekiq.
