@@ -17,7 +17,7 @@
         <td><%= offer.description %></td>
         <td><%= link_to 'Show', [:admin, offer] %></td>
         <td><%= link_to 'Edit', edit_admin_offer_path(offer) %></td>
-        <td><%= link_to offer.disabled? ? 'Enable' : 'Disable', [status.to_sym, :admin, offer] %></td>
+        <td><%= link_to offer.disabled? ? 'Enable' : 'Disable', [status.to_sym, :admin, offer], method: :patch %></td>
         <td><%= link_to 'Destroy', [:admin, offer], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
