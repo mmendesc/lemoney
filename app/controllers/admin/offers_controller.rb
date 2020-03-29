@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::OffersController < Admin::ApplicationController
-  before_action :set_offer, except: %w(index create)
+  before_action :set_offer, except: %w(index create new)
 
   def index
     @offers = Offer.all
